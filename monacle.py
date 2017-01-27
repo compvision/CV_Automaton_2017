@@ -25,7 +25,7 @@ while display.isNotDone():
             ye = eye.y - (eye.height()/2)
             #calculate the monacle position
             xmust = xf+xe-(monacle.width/2)+(eye.width()/2)
-            ymust = yf+ye #+(2*nose.height()/3)
+            ymust = yf-ye #+(2*nose.height()/3)
             #blit the stache/mask onto the image
             img = img.blit(monacle, pos=(xmust,ymust), mask = mask)
 
