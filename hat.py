@@ -5,7 +5,7 @@ display = Display()
 
 # load the cascades
 hat = Image("hat.png", sample=True) # load the stache
-mask = stache.createAlphaMask().invert() # load the stache mask
+mask = hat.createAlphaMask().invert() # load the stache mask
 
 while display.isNotDone():
     img = cam.getImage()
