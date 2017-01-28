@@ -10,11 +10,13 @@ mask = stache.createAlphaMask().invert() # load the stache mask
 while display.isNotDone():
     img = cam.getImage()
     faces = img.findHaarFeatures("face.xml") #find faces
+
     if faces: # if we have a face
         faces.sortArea() #get the biggest one
         face = faces[-1] #last element
         myFace = face.crop() # get the face image
         eyes = myFace.findHaarFeatures('lefteye.xml') #find the eye
+        
         if eyes:
             eyes.sortArea()
             eye = eyes[-1]
@@ -27,6 +29,6 @@ while display.isNotDone():
             xmust = xf + xe - (monacle.width/2) + (eye.width()/2)
             ymust = yf-ye #+(2*nose.height()/3)
             #blit the stache/mask onto the image
-            img = img.blit(monacle, pos=(xmust,ymust), mask = mask)
+            img = img.sprite(monacle, pos=(xmust,ymust), scale=1.0, rot=0.0, alpha=255)
 
 img.save(display) #display
