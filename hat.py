@@ -18,9 +18,8 @@ while display.isNotDone():
 		xf = face.width()/2
 		yf = face.y
 		#calculate the hat's position
-		xmust = xf - (hat.width/2)
-		ymust = yf + hat.height
+		xh = xf - (hat.width/2)
+		yh = yf + hat.height
 		#blit the stache/mask onto the image
-		img = img.blit(hat, pos=(xmust,ymust), mask = mask)
-		img.save(display)
-img.save(display) #display
+		img = img.blit(hat, pos=(xh,yh), mask = mask)
+    img.save(display)

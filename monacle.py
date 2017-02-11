@@ -30,5 +30,4 @@ while display.isNotDone():
 			ymust = yf-ye #+(2*nose.height()/3)
 			#blit the stache/mask onto the image
 			img = img.blit(monacle, pos=(xmust,ymust), mask = mask)
-			img.save(display) #display
-	img.save(display)
+    img.save(display) #display

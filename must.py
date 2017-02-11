@@ -18,7 +18,7 @@ noseCascade = cv2.CascadeClassifier(noseCascadeFilePath)
 #-----------------------------------------------------------------------------
 #       Load and configure mustache (.png with alpha transparency)
 #-----------------------------------------------------------------------------
- 
+
 # Load our overlay image: mustache.png
 imgMustache = cv2.imread("mustache.png",-1)
  
