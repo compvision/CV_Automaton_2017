@@ -5,8 +5,6 @@
 * Human detector
 * Accurate real time face detection system
 
-###Contributors
+###Contributor
 
 * Robert Lee
-* Justin Davis
-* Garrison Astaunda
