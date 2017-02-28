@@ -5,8 +5,8 @@ import cv2  # OpenCV Library
 #-----------------------------------------------------------------------------
   
 # build our cv2 Cascade Classifiers
-faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-eyeCascade = cv2.CascadeClassifier("haarcascade_lefteye_2splits.xml")
+faceCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_frontalface_default.xml")
+eyeCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_lefteye_2splits.xml")
  
 #-----------------------------------------------------------------------------
 #       Load and configure hat (.png with alpha transparency)
