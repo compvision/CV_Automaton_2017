@@ -108,18 +108,18 @@ while(cv2.waitKey(30) != 30):
             monocleHeight = ew * 3
             monocleWidth = monocleHeight * origMonacleWidth / origMonacleHeight
 
-            ex1 = ex
-            ex2 = ex + (ew/2) + (eh/2)
-            ey1 = ey
-            ey2 = ey + eh
+            ex1 = ex - (monacleWidth/4)
+            ex2 = ex + ew + (monacleWidth/4)
+            ey1 = ey + eh - (monacleHeight/2)
+            ey2 = ey + eh + (monacleHeight/2)
 
             #if ex1 < 0:
             #    ex1 = 0
-            #if ex2 > ew + ex:
+            #if ex2 > ew:
             #    ex2 = ew
             #if ey1 < 0:
             #    ey1 = 0
-            #if ey2 > eh + ey:
+            #if ey2 > eh:
             #    ey2 = eh
 
             #monocleHeight = ey2 - ey1
@@ -132,15 +132,15 @@ while(cv2.waitKey(30) != 30):
             #print ex1
             #print monocleWidth
 
-            #monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
-            #mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
-            #mask_inv_m = cv2.resize(orig_mask_inv_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+            monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+            mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+            mask_inv_m = cv2.resize(orig_mask_inv_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
 
-            #roi_m = roi_color_m[ey1:ey2, ex1:ex2]
-            #roi_bg_m = cv2.bitwise_and(roi_m,roi_m,mask = mask_inv_m)
-            #roi_fg_m = cv2.bitwise_and(monocle,monocle,mask = mask_m)
-            #dst_m = cv2.add(roi_bg_m,roi_fg_m)
-            #roi_color_m[ey1:ey2, ex1:ex2] = dst_m
+            roi_m = roi_color_m[ey1:ey2, ex1:ex2]
+            roi_bg_m = cv2.bitwise_and(roi_m,roi_m,mask = mask_inv_m)
+            roi_fg_m = cv2.bitwise_and(monocle,monocle,mask = mask_m)
+            dst_m = cv2.add(roi_bg_m,roi_fg_m)
+            roi_color_m[ey1:ey2, ex1:ex2] = dst_m
 
             break
 
