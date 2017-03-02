@@ -6,7 +6,7 @@ import cv2  # OpenCV Library
 
 # build our cv2 Cascade Classifiers
 faceCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_frontalface_default.xml")
-noseCascade = cv2.CasacadeClassifier("reference/haarcasacde_mcs_nose.xml")
+noseCascade = cv2.CasacadeClassifier("reference/haarcascade_mcs_nose.xml")
 #eyeCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_eye.xml")
 #leftEyeCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_lefteye_2splits.xml")
 
