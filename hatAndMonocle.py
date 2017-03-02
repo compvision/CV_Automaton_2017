@@ -103,7 +103,7 @@ while(cv2.waitKey(30) != 30):
 
         for (ex,ey,ew,eh) in eye:
             # Un-comment the next line for debug (draw box around the nose)
-            cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
+            #cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
 
             monocleHeight = ew * 3
             monocleWidth = monocleHeight * origMonacleWidth / origMonacleHeight
@@ -113,17 +113,17 @@ while(cv2.waitKey(30) != 30):
             ey1 = ey + eh - (monocleHeight/2)
             ey2 = ey + eh + (monocleHeight/2)
 
-            #if ex1 < 0:
-            #    ex1 = 0
-            #if ex2 > ew:
-            #    ex2 = ew
-            #if ey1 < 0:
-            #    ey1 = 0
-            #if ey2 > eh:
-            #    ey2 = eh
+            if ex1 < 0:
+                ex1 = 0
+            if ex2 > ew:
+                ex2 = ew
+            if ey1 < 0:
+                ey1 = 0
+            if ey2 > eh:
+                ey2 = eh
 
-            #monocleHeight = ey2 - ey1
-            #monocleWidth = ex2 - ex1
+            monocleHeight = ey2 - ey1
+            monocleWidth = ex2 - ex1
 
             #print "EX: " + str(ex)
             #print "EW: " + str(ew)
