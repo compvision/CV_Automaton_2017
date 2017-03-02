@@ -6,7 +6,7 @@ import cv2  # OpenCV Library
 
 # build our cv2 Cascade Classifiers
 faceCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_frontalface_default.xml")
-noseCascade = cv2.CasacadeClassifier("reference/haarcascade_mcs_nose.xml")
+noseCascade = cv2.CascadeClassifier("reference/haarcascade_mcs_nose.xml")
 #eyeCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_eye.xml")
 #leftEyeCascade = cv2.CascadeClassifier("cascadeFiles/haarcascade_lefteye_2splits.xml")
 
@@ -108,10 +108,10 @@ while(cv2.waitKey(30) != 30):
             monocleHeight = ew * 3
             monocleWidth = monocleHeight * origMonacleWidth / origMonacleHeight
 
-            ex1 = ex - (monacleWidth/4)
-            ex2 = ex + ew + (monacleWidth/4)
-            ey1 = ey + eh - (monacleHeight/2)
-            ey2 = ey + eh + (monacleHeight/2)
+            ex1 = ex - (monocleWidth/4)
+            ex2 = ex + ew + (monocleWidth/4)
+            ey1 = ey + eh - (monocleHeight/2)
+            ey2 = ey + eh + (monocleHeight/2)
 
             #if ex1 < 0:
             #    ex1 = 0
