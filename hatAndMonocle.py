@@ -132,6 +132,7 @@ while(cv2.waitKey(30) != 30):
             #print eh
             #print ex2
             #print ex1
+            print ey2
             print "MustsacheWidth" + str(monocleWidth)
             print "MustacheHeight" + str(monocleHeight)
 
