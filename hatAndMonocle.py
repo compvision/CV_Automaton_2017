@@ -82,8 +82,8 @@ while(cv2.waitKey(30) != 30):
         hatHeight = y2 - y1
         hatWidth = x2 - x1
 
-        print hatWidth
-        print hatHeight
+        #print hatWidth
+        #print hatHeight
 
         hat = cv2.resize(imgHat, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
         mask = cv2.resize(orig_mask, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
@@ -116,11 +116,11 @@ while(cv2.waitKey(30) != 30):
             if ex1 < 0:
                 ex1 = 0
             if ex2 > ew + (2 * ex):
-                ex2 = ew
+                ex2 = ew + (2 * ex)
             if ey1 < 0:
                 ey1 = 0
             if ey2 > eh + (2 * ey):
-                ey2 = eh
+                ey2 = eh + (2 * ey)
 
             monocleHeight = ey2 - ey1
             monocleWidth = ex2 - ex1
@@ -130,7 +130,8 @@ while(cv2.waitKey(30) != 30):
             #print eh
             #print ex2
             #print ex1
-            #print monocleWidth
+            print "MustsacheWidth" + str(monocleWidth)
+            print "MustacheHeight" + str(monocleHeight)
 
             monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
             mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
