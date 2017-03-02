@@ -125,8 +125,10 @@ while(cv2.waitKey(30) != 30):
             monocleHeight = ey2 - ey1
             monocleWidth = ex2 - ex1
 
-            #print "EX: " + str(ex)
-            #print "EW: " + str(ew)
+            print "EX: " + str(ex)
+            print "EW: " + str(ew)
+            print "EH: " + str(eh)
+            print "EY: " + str(ey)
             #print eh
             #print ex2
             #print ex1
