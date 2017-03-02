@@ -115,8 +115,8 @@ while(cv2.waitKey(30) != 30):
 
             if ex1 < 0:
                 ex1 = 0
-            if ex2 > ew + ex:
-                ex2 = ew + ex
+            if ex2 > ew + ex + ex:
+                ex2 = ew + ex + ex
             if ey1 < 0:
                 ey1 = 0
             if ey2 > eh + ey:
