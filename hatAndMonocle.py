@@ -105,8 +105,8 @@ while(cv2.waitKey(30) != 30):
             # Un-comment the next line for debug (draw box around the nose)
             cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
 
-            monocleHeight = ew * 3
-            monocleWidth = monocleHeight * origMonacleWidth / origMonacleHeight
+            monocleWidth = ew * 3
+            monocleHeight = monocleWidth * origMonacleHeight / origMonacleWidth
 
             ex1 = ex - (monocleWidth/4)
             ex2 = ex + ew + (monocleWidth/4)
