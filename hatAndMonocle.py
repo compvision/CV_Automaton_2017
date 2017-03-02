@@ -119,8 +119,8 @@ while(cv2.waitKey(30) != 30):
                 ex2 = ew + ex + ex
             if ey1 < 0:
                 ey1 = 0
-            if ey2 > eh + ey:
-                ey2 = eh + ey
+            if ey2 > eh + ey + ey:
+                ey2 = eh + ey + ey
 
             monocleHeight = ey2 - ey1
             monocleWidth = ex2 - ex1
