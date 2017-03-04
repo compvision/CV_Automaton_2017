@@ -38,6 +38,9 @@ origMonacleHeight, origMonacleWidth = imgMonacle.shape[:2]
 #       Main program loop
 #-----------------------------------------------------------------------------
 
+cv2.namedWindow("Live Feed", cv2.WND_PROP_FULLSCREEN)
+cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.CV_WINDOW_FULLSCREEN)
+
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(0)
 
@@ -173,10 +176,10 @@ while(cv2.waitKey(30) != 30):
 
             break
 
-
+    #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
     # Display the resulting frame
-    cv2.imshow('Live Feed', overlayed)
+    cv2.imshow("Live Feed", overlayed)
 
     # press any key to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
