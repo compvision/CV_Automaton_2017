@@ -120,6 +120,8 @@ while(cv2.waitKey(30) != 30):
         # Detect an eye within the region bounded by each face (the ROI)
         eye = noseCascade.detectMultiScale(roi_gray_m)
 
+        print "before nose"
+
         for (ex,ey,ew,eh) in eye:
             # Un-comment the next line for debug (draw box around the nose)
             # cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
