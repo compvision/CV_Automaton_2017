@@ -77,7 +77,7 @@ while(cv2.waitKey(30) != 30):
     print w
     print h
 
-    if w != 0 & h != 0:
+    if (w != 0) and (h != 0):
         # Un-comment the next line for debug (draw box around all faces)
         # face = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
 
