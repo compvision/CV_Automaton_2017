@@ -103,7 +103,7 @@ while(cv2.waitKey(30) != 30):
 
         hatHeight = y2 - y1
         hatWidth = x2 - x1
-        
+
         print hatWidth
         print hatHeight
 
@@ -112,69 +112,72 @@ while(cv2.waitKey(30) != 30):
         mask_inv = cv2.resize(orig_mask_inv, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
         roi = frame[y1:y2, x1:x2]
-        roi_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)
-        roi_fg = cv2.bitwise_and(hat,hat,mask = mask)
-        dst = cv2.add(roi_bg,roi_fg)
-        frame[y1:y2, x1:x2] = dst
 
-        roi_gray_m = gray[y:y+h, x:x+w]
-        roi_color_m = frame[y:y+h, x:x+w]
+        try:
+            roi_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
+            roi_fg = cv2.bitwise_and(hat, hat, mask=mask)
+            dst = cv2.add(roi_bg,roi_fg)
+            frame[y1:y2, x1:x2] = dst
 
-        # Detect an eye within the region bounded by each face (the ROI)
-        eye = noseCascade.detectMultiScale(roi_gray_m)
+        finally:
+            roi_gray_m = gray[y:y+h, x:x+w]
+            roi_color_m = frame[y:y+h, x:x+w]
 
-        #print "before nose"
+            # Detect an eye within the region bounded by each face (the ROI)
+            eye = noseCascade.detectMultiScale(roi_gray_m)
 
-        for (ex,ey,ew,eh) in eye:
-            # Un-comment the next line for debug (draw box around the nose)
-            # cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
+            #print "before nose"
 
-            monocleWidth = ew * 3
-            monocleHeight = monocleWidth * origMonacleHeight / origMonacleWidth
+            for (ex,ey,ew,eh) in eye:
+                # Un-comment the next line for debug (draw box around the nose)
+                # cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
 
-            ex1 = ex - (monocleWidth/4)
-            ex2 = ex + ew + (monocleWidth/4)
-            ey1 = ey + eh - (monocleHeight/2)
-            ey2 = ey + eh + (monocleHeight/2)
+                monocleWidth = ew * 3
+                monocleHeight = monocleWidth * origMonacleHeight / origMonacleWidth
 
-            if ex1 < 0:
-                ex1 = 0
-            if ex2 > w:
-                ex2 = w
-            if ey1 < 0:
-                ey1 = 0
-            if ey2 > h:
-                ey2 = h
+                ex1 = ex - (monocleWidth/4)
+                ex2 = ex + ew + (monocleWidth/4)
+                ey1 = ey + eh - (monocleHeight/2)
+                ey2 = ey + eh + (monocleHeight/2)
 
-            monocleHeight = ey2 - ey1
-            monocleWidth = ex2 - ex1
+                if ex1 < 0:
+                    ex1 = 0
+                if ex2 > w:
+                    ex2 = w
+                if ey1 < 0:
+                    ey1 = 0
+                if ey2 > h:
+                    ey2 = h
 
-            #print "EX: " + str(ex)
-            #print "EW: " + str(ew)
-            #print "EH: " + str(eh)
-            #print "EY: " + str(ey)
-            #print eh
-            #print ex2
-            #print ex1
-            #print ey2
-            #print "MustacheWidth" + str(monocleWidth)
-            #print "MustacheHeight" + str(monocleHeight)
+                monocleHeight = ey2 - ey1
+                monocleWidth = ex2 - ex1
 
-            monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
-            mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
-            mask_inv_m = cv2.resize(orig_mask_inv_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+                #print "EX: " + str(ex)
+                #print "EW: " + str(ew)
+                #print "EH: " + str(eh)
+                #print "EY: " + str(ey)
+                #print eh
+                #print ex2
+                #print ex1
+                #print ey2
+                #print "MustacheWidth" + str(monocleWidth)
+                #print "MustacheHeight" + str(monocleHeight)
 
-            roi_m = roi_color_m[ey1:ey2, ex1:ex2]
-            roi_bg_m = cv2.bitwise_and(roi_m,roi_m,mask = mask_inv_m)
-            roi_fg_m = cv2.bitwise_and(monocle,monocle,mask = mask_m)
-            dst_m = cv2.add(roi_bg_m,roi_fg_m)
-            roi_color_m[ey1:ey2, ex1:ex2] = dst_m
+                monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+                mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
+                mask_inv_m = cv2.resize(orig_mask_inv_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
 
-            #print "made it to mustache end"
+                roi_m = roi_color_m[ey1:ey2, ex1:ex2]
+                roi_bg_m = cv2.bitwise_and(roi_m,roi_m,mask = mask_inv_m)
+                roi_fg_m = cv2.bitwise_and(monocle,monocle,mask = mask_m)
+                dst_m = cv2.add(roi_bg_m,roi_fg_m)
+                roi_color_m[ey1:ey2, ex1:ex2] = dst_m
 
-            overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+                #print "made it to mustache end"
 
-            break
+                overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+
+                break
 
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
