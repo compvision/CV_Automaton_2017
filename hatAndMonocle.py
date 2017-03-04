@@ -165,6 +165,8 @@ while(cv2.waitKey(30) != 30):
             dst_m = cv2.add(roi_bg_m,roi_fg_m)
             roi_color_m[ey1:ey2, ex1:ex2] = dst_m
 
+            print "made it to mustache end"
+
             overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
 
             break
