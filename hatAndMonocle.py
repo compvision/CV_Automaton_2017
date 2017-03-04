@@ -94,12 +94,12 @@ while(cv2.waitKey(30) != 30):
 
         if x1 < 0:
             x1 = 0
-        if x2 > cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH):
-            x2 = cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH)
+        if x2 > 1280:
+            x2 = 1280
         if y1 < 0:
             y1 = 0
-        if y2 > cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT):
-            y2 = cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)
+        if y2 > 720:
+            y2 = 720
 
         hatHeight = y2 - y1
         hatWidth = x2 - x1
