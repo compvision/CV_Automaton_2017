@@ -45,7 +45,7 @@ while(cv2.waitKey(30) != 30):
     # Capture video feed
     ret, frame = video_capture.read()
 
-    overlay = frame
+    overlayed = frame
 
     # Create greyscale image from the video feed
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -165,9 +165,11 @@ while(cv2.waitKey(30) != 30):
             dst_m = cv2.add(roi_bg_m,roi_fg_m)
             roi_color_m[ey1:ey2, ex1:ex2] = dst_m
 
+            overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+
             break
 
-        overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+
 
     # Display the resulting frame
     cv2.imshow('Live Feed', overlayed)
