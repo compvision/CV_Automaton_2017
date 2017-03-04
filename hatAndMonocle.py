@@ -39,7 +39,7 @@ origMonacleHeight, origMonacleWidth = imgMonacle.shape[:2]
 #-----------------------------------------------------------------------------
 
 cv2.namedWindow("Live Feed", cv2.WND_PROP_FULLSCREEN)
-cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
+cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.cv.xCV_WINDOW_FULLSCREEN)
 
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(0)
@@ -94,18 +94,21 @@ while(cv2.waitKey(30) != 30):
 
         if x1 < 0:
             x1 = 0
-        if x2 > 1280:
-            x2 = 1280
+        if x2 > cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH):
+            x2 = cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH)
         if y1 < 0:
             y1 = 0
-        if y2 > 960:
-            y2 = 960
+        if y2 > cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT):
+            y2 = cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)
 
         hatHeight = y2 - y1
         hatWidth = x2 - x1
 
-        #print hatWidth
-        #print hatHeight
+        print cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH)
+        print cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)
+
+        print hatWidth
+        print hatHeight
 
         hat = cv2.resize(imgHat, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
         mask = cv2.resize(orig_mask, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
@@ -123,7 +126,7 @@ while(cv2.waitKey(30) != 30):
         # Detect an eye within the region bounded by each face (the ROI)
         eye = noseCascade.detectMultiScale(roi_gray_m)
 
-        print "before nose"
+        #print "before nose"
 
         for (ex,ey,ew,eh) in eye:
             # Un-comment the next line for debug (draw box around the nose)
@@ -149,16 +152,16 @@ while(cv2.waitKey(30) != 30):
             monocleHeight = ey2 - ey1
             monocleWidth = ex2 - ex1
 
-            print "EX: " + str(ex)
-            print "EW: " + str(ew)
-            print "EH: " + str(eh)
-            print "EY: " + str(ey)
+            #print "EX: " + str(ex)
+            #print "EW: " + str(ew)
+            #print "EH: " + str(eh)
+            #print "EY: " + str(ey)
             #print eh
             #print ex2
             #print ex1
-            print ey2
-            print "MustacheWidth" + str(monocleWidth)
-            print "MustacheHeight" + str(monocleHeight)
+            #print ey2
+            #print "MustacheWidth" + str(monocleWidth)
+            #print "MustacheHeight" + str(monocleHeight)
 
             monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
             mask_m = cv2.resize(orig_mask_m, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
@@ -170,7 +173,7 @@ while(cv2.waitKey(30) != 30):
             dst_m = cv2.add(roi_bg_m,roi_fg_m)
             roi_color_m[ey1:ey2, ex1:ex2] = dst_m
 
-            print "made it to mustache end"
+            #print "made it to mustache end"
 
             overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
 
