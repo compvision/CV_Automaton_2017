@@ -57,8 +57,20 @@ while(cv2.waitKey(30) != 30):
         flags=cv2.CASCADE_SCALE_IMAGE
     )
 
-    # Iterate over each face found
-    for (x, y, w, h) in faces:
+    x = 0
+    y = 0
+    w = 0
+    h = 0
+
+    # Iterate to find largest face
+    for (tx, ty, tw, th) in faces:
+        if tw*th > w*h:
+            x = tx
+            y = ty
+            w = tw
+            h = th
+
+    if w != 0 & h != 0:
         # Un-comment the next line for debug (draw box around all faces)
         # face = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
 
@@ -103,7 +115,7 @@ while(cv2.waitKey(30) != 30):
 
         for (ex,ey,ew,eh) in eye:
             # Un-comment the next line for debug (draw box around the nose)
-            cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
+            # cv2.rectangle(roi_color_m,(ex,ey),(ex+ew,ey+eh),(255,0,0),2)
 
             monocleWidth = ew * 3
             monocleHeight = monocleWidth * origMonacleHeight / origMonacleWidth
@@ -133,7 +145,7 @@ while(cv2.waitKey(30) != 30):
             #print ex2
             #print ex1
             print ey2
-            print "MustsacheWidth" + str(monocleWidth)
+            print "MustacheWidth" + str(monocleWidth)
             print "MustacheHeight" + str(monocleHeight)
 
             monocle = cv2.resize(imgMonacle, (monocleWidth,monocleHeight), interpolation = cv2.INTER_AREA)
@@ -148,8 +160,10 @@ while(cv2.waitKey(30) != 30):
 
             break
 
+        overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+
     # Display the resulting frame
-    cv2.imshow('Live Feed', frame)
+    cv2.imshow('Live Feed', overlayed)
 
     # press any key to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
