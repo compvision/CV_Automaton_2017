@@ -103,10 +103,7 @@ while(cv2.waitKey(30) != 30):
 
         hatHeight = y2 - y1
         hatWidth = x2 - x1
-
-        print cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_WIDTH)
-        print cv2.VideoCapture.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)
-
+        
         print hatWidth
         print hatHeight
 
