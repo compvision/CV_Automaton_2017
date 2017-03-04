@@ -45,6 +45,8 @@ while(cv2.waitKey(30) != 30):
     # Capture video feed
     ret, frame = video_capture.read()
 
+    overlay = frame
+
     # Create greyscale image from the video feed
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -69,6 +71,11 @@ while(cv2.waitKey(30) != 30):
             y = ty
             w = tw
             h = th
+
+    print x
+    print y
+    print w
+    print h
 
     if w != 0 & h != 0:
         # Un-comment the next line for debug (draw box around all faces)
