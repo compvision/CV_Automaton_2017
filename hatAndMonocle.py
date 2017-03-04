@@ -39,7 +39,7 @@ origMonacleHeight, origMonacleWidth = imgMonacle.shape[:2]
 #-----------------------------------------------------------------------------
 
 cv2.namedWindow("Live Feed", cv2.WND_PROP_FULLSCREEN)
-cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.CV_WINDOW_FULLSCREEN)
+cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
 
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(0)
