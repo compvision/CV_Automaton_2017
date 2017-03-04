@@ -175,9 +175,10 @@ while(cv2.waitKey(30) != 30):
 
                 #print "made it to mustache end"
 
-                overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
+                #overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
 
                 break
+            overlayed = frame[y1*(6/5):(x + h)*(6/5), x1*(6/5):x2*(6/5)]
 
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
