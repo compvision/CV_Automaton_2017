@@ -1,5 +1,7 @@
 import cv2  # OpenCV Library
+import sys
 
+deviceId = int(sys.argv[1])
 #-----------------------------------------------------------------------------
 #       Load and configure Haar Cascade Classifiers
 #-----------------------------------------------------------------------------
@@ -42,7 +44,7 @@ cv2.namedWindow("Live Feed", cv2.WND_PROP_FULLSCREEN)
 cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
 
 # collect video input from first webcam on system
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(deviceId)
 
 while(cv2.waitKey(30) != 30):
     # Capture video feed
