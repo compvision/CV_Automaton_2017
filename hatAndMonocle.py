@@ -1,5 +1,4 @@
 import cv2  # OpenCV Library
-import sys
 
 deviceId = int(sys.argv[1])
 #-----------------------------------------------------------------------------
@@ -40,8 +39,8 @@ origMonacleHeight, origMonacleWidth = imgMonacle.shape[:2]
 #       Main program loop
 #-----------------------------------------------------------------------------
 
-cv2.namedWindow("Live Feed", cv2.WND_PROP_FULLSCREEN)
-cv2.setWindowProperty("Live Feed", cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
+cv2.namedWindow("Live Feed", 0)
+cv2.setWindowProperty("Live Feed", 0, 1)
 
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(deviceId)
@@ -181,7 +180,15 @@ while(cv2.waitKey(30) != 30):
 
                 break
         finally:
-            overlayed = frame[y1:(y + h), x1:x2]
+            cropy1 = y + (h/2) - ((x2-x1)*(2/3))
+            cropy2 = y + (h/2) + ((x2-x1)*(2/3))
+
+            if cropy1 < 0:
+                cropy1 = 0
+            if cropy2 > 720:
+                cropy2 = 720
+
+            overlayed = frame[cropy1:cropy2, x1:x2]
 
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
