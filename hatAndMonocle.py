@@ -45,7 +45,7 @@ cv2.setWindowProperty("Live Feed", 0, 1)
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(deviceId)
 
-while(cv2.waitKey(30) != 30):
+while(cv2.waitKey(30) != 27):
     # Capture video feed
     ret, frame = video_capture.read()
 
@@ -76,15 +76,14 @@ while(cv2.waitKey(30) != 30):
             w = tw
             h = th
 
-    print x
-    print y
-    print w
-    print h
+    #print x
+    #print y
+    #print w
+    #print h
 
     if (w != 0) and (h != 0):
         # Un-comment the next line for debug (draw box around all faces)
         # face = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-
         hatWidth = w * 3 / 2
         hatHeight = hatWidth * origHatHeight / origHatWidth
 
@@ -113,7 +112,6 @@ while(cv2.waitKey(30) != 30):
         mask_inv = cv2.resize(orig_mask_inv, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
         roi = frame[y1:y2, x1:x2]
-
         try:
             roi_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
             roi_fg = cv2.bitwise_and(hat, hat, mask=mask)
@@ -193,7 +191,7 @@ while(cv2.waitKey(30) != 30):
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
     # Display the resulting frame
-    cv2.imshow("Live Feed", overlayed)
+    cv2.imshow("Live Feed", frame)
 
     # press any key to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
