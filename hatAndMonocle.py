@@ -179,8 +179,8 @@ while(cv2.waitKey(30) != 27):
 
                 break
         finally:
-            cropy1 = y + (h/2) - ((x2-x1)*(2/3))
-            cropy2 = y + (h/2) + ((x2-x1)*(2/3))
+            cropy1 = y + (h/2) - ((x2-x1)*(float(2)/3))
+            cropy2 = y + (h/2) + ((x2-x1)*(float(2)/3))
 
             if cropy1 < 0:
                 cropy1 = 0
@@ -192,8 +192,12 @@ while(cv2.waitKey(30) != 27):
             print cropy2
             print "cropy1: "
             print cropy1
+            print "x1: " 
+            print x1
+            print "x2: "
+            print x2
             #small = cv2.resize(frame[5:100, 5:x2], (hatWidth,hatHeight), fx=0.5, fy=0.5)
-            overlayed = frame[y1:y2, x1:x2]
+            overlayed = frame[int(cropy1):int(cropy2), x1:x2]
 
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight),fx=0.5, fy=0.5) #interpolation = cv2.INTER_AREA)
     
