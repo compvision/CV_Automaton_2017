@@ -1,6 +1,6 @@
 import cv2  # OpenCV Library
 
-deviceId = int(sys.argv[1])
+deviceId = 0
 #-----------------------------------------------------------------------------
 #       Load and configure Haar Cascade Classifiers
 #-----------------------------------------------------------------------------
@@ -45,12 +45,12 @@ cv2.setWindowProperty("Live Feed", 0, 1)
 # collect video input from first webcam on system
 video_capture = cv2.VideoCapture(deviceId)
 
-while(cv2.waitKey(30) != 30):
+while(cv2.waitKey(30) != 27):
     # Capture video feed
     ret, frame = video_capture.read()
-
+    height,width,_ = frame.shape
     overlayed = frame
-
+    #small = frame
     # Create greyscale image from the video feed
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -76,15 +76,15 @@ while(cv2.waitKey(30) != 30):
             w = tw
             h = th
 
-    print x
-    print y
-    print w
-    print h
-
+    #print x
+    #print y
+    #print w
+    #print h
+    hatWidth = 0
+    hatHeight = 0
     if (w != 0) and (h != 0):
         # Un-comment the next line for debug (draw box around all faces)
         # face = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-
         hatWidth = w * 3 / 2
         hatHeight = hatWidth * origHatHeight / origHatWidth
 
@@ -95,25 +95,24 @@ while(cv2.waitKey(30) != 30):
 
         if x1 < 0:
             x1 = 0
-        if x2 > 1280:
-            x2 = 1280
+        if x2 > width:
+            x2 = width
         if y1 < 0:
             y1 = 0
-        if y2 > 720:
-            y2 = 720
+        if y2 > height:
+            y2 = height
 
         hatHeight = y2 - y1
         hatWidth = x2 - x1
 
-        print hatWidth
-        print hatHeight
+        #print hatWidth
+        #print hatHeight
 
         hat = cv2.resize(imgHat, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
         mask = cv2.resize(orig_mask, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
         mask_inv = cv2.resize(orig_mask_inv, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
 
         roi = frame[y1:y2, x1:x2]
-
         try:
             roi_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
             roi_fg = cv2.bitwise_and(hat, hat, mask=mask)
@@ -185,13 +184,19 @@ while(cv2.waitKey(30) != 30):
 
             if cropy1 < 0:
                 cropy1 = 0
-            if cropy2 > 720:
-                cropy2 = 720
+            if(cropy1 >= cropy2):
+                cropy1 = cropy2-1
+            if cropy2 >height:
+                cropy2=height
+            print "cropy2: "
+            print cropy2
+            print "cropy1: "
+            print cropy1
+            #small = cv2.resize(frame[5:100, 5:x2], (hatWidth,hatHeight), fx=0.5, fy=0.5)
+            overlayed = frame[y1:y2, x1:x2]
 
-            overlayed = frame[cropy1:cropy2, x1:x2]
-
-    #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight), interpolation = cv2.INTER_AREA)
-
+    #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight),fx=0.5, fy=0.5) #interpolation = cv2.INTER_AREA)
+    
     # Display the resulting frame
     cv2.imshow("Live Feed", overlayed)
 
