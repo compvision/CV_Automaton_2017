@@ -192,7 +192,7 @@ while(cv2.waitKey(30) != 27):
             print cropy2
             print "cropy1: "
             print cropy1
-            print "x1: " 
+            print "x1: "
             print x1
             print "x2: "
             print x2
@@ -200,7 +200,7 @@ while(cv2.waitKey(30) != 27):
             overlayed = frame[int(cropy1):int(cropy2), x1:x2]
 
     #overlayed = cv2.resize(overlayed, (hatWidth,hatHeight),fx=0.5, fy=0.5) #interpolation = cv2.INTER_AREA)
-    
+
     # Display the resulting frame
     cv2.imshow("Live Feed", overlayed)
 
